@@ -1,7 +1,22 @@
 import React, { Component } from 'react'
 import { Container, Thumbnail,Button,Icon, Content, Card, CardItem, Body, Left, Right } from 'native-base';
 import { Header } from 'react-native-elements';
-import {View, Text, Image} from 'react-native'
+import {View, Text, Image, Dimensions} from 'react-native'
+import CardComponent from '../CardComponent';
+
+var {width, height} = Dimensions.get('window')
+
+var images = [
+    require('../../img/1.jpg'),
+    require('../../img/2.jpg'),
+    require('../../img/3.jpg'),
+    require('../../img/4.jpg'),
+    require('../../img/4.jpg'),
+    require('../../img/3.jpg'),
+    require('../../img/2.jpg'),
+    require('../../img/3.jpg'),
+    require('../../img/1.jpg'),
+]
 
 export default class ProfileTab extends Component {
     constructor(props){
@@ -15,6 +30,38 @@ export default class ProfileTab extends Component {
         this.setState({
             activeIndex:index
         })
+    }
+
+    renderSectionOne = () => {
+            return images.map((image, index) => {
+                return(
+                    <View key={index} style={[{width:width/3, height:width/3},
+                        {marginBottom:2}, index % 3 !== 0 ? {paddingLeft:2} : {paddingLeft:0}
+                    ]}>
+                    <Image style={{flex:1, width:undefined, height:undefined}}
+                        source={image} />
+                </View>
+                )
+            })
+    }
+
+    renderSection = () => {
+        if(this.state.activeIndex == 0){
+            return(
+                <View style = { { flexDirection: 'row',flexWrap: 'wrap'}} >
+                    {this.renderSectionOne()}
+                </View>
+            )
+        }
+        else if(this.state.activeIndex == 1){
+            return (
+                <View>
+                    <CardComponent imageSource="1" likes="550"/>
+                    <CardComponent imageSource="2" likes="942"/>
+                    <CardComponent imageSource="3" likes="920"/>
+                </View>
+            )
+        }
     }
 
     render() {
@@ -115,6 +162,7 @@ export default class ProfileTab extends Component {
                                     />
                                </Button>
                            </View>
+                           {this.renderSection()}
                        </View>
                     </Content>
             </Container>

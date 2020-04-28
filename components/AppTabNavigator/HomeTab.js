@@ -2,13 +2,28 @@ import React, { Component } from 'react'
 import {View, Text, StyleSheet, ScrollView} from 'react-native'
 import { Container, Content, Card, Thumbnail, Icon } from 'native-base'
 import CardComponent from '../CardComponent'
+import { Header } from 'react-native-elements';
+
 
 export default class HomeTab extends Component {
     render() {
         
         return (
             <Container style={styles.container}>
-                
+                <Header
+                    containerStyle={{
+                        backgroundColor: '#fff',
+                        justifyContent: 'center',
+                        paddingHorizontal: 14,
+                        borderWidth:.2,
+                        borderBottomColor:'#dedede'
+
+                    }}
+                    leftComponent={{ icon: 'camera', color: '#000' }}
+                    centerComponent={{ text: 'Instagram', style: { color: '#000', fontSize:20, fontWeight:'700' } }}
+                    rightComponent={{ icon: 'send', color: '#000' }}
+                    />
+
                 <Content>
 
                     <View style={{height:100}}>
